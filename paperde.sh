@@ -26,12 +26,28 @@ apk add --no-cache \
 		qt5-qttranslations \
 		qt5-qtgraphicaleffects 
 
-apk add git meson wlroots ninja qt5-qtbase-x11 qt5-qtbase qt5-qtbase-dev qt5-qtwayland qt5-qtwayland-dev qt5-qtsvg qt5-qtsvg-dev qt5-qttools-dev libdbusmenu-qt-dev wayland-protocols wayland libcprime libcprime-dev libcsys libcsys-dev xdg-desktop-portal xdg-desktop-portal-kde xdg-desktop-portal-gtk xdg-desktop-portal-wlr make g++ swaylock swayidle brightnessctl mako playerctl cmake
+apk add git meson wlroots ninja qt5-qtbase-x11 qt5-qtbase qt5-qtbase-dev qt5-qtwayland qt5-qtwayland-dev qt5-qtsvg qt5-qtsvg-dev qt5-qttools-dev libdbusmenu-qt-dev wayland-protocols wayland libcprime libcprime-dev libcsys libcsys-dev xdg-desktop-portal xdg-desktop-portal-kde xdg-desktop-portal-gtk xdg-desktop-portal-wlr make g++ swaylock swayidle brightnessctl mako playerctl cmake pango pango-dev glm glm-dev libinput libinput-dev hwdata-dev hwdata libseat-dev libseat xwayland-dev xwayland xcb-util-renderutil-dev xcb-util-renderutil libevdev-dev libevdev xcb-util-wm-dev xcb-util-wm doctest-dev doctest doxygen inotify-tools inotify-tools-dev inotify-tools-libs libconfig-dev libconfig
+
+apk add --update alpine-sdk && apk add libffi-dev openssl-dev && apk --no-cache --update add build-base
+
+#libexecinfo-dev libexecinfo xcb-util-errors
+
+apk add --no-cache \
+    build-base cairo-dev cairo cairo-tools jpeg-dev zlib-dev freetype-dev lcms2-dev openjpeg-dev tiff-dev tk-dev tcl-dev
 
 echo Edge repository
-apk add wayfire --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing
-apk add clipman --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing
-cd ..
+## apk add wayfire --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+apk add clipman --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+apk add wlroots --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
+apk add wlroots-dev --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
+apk add libudev-zero --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+apk add libudev-zero-dev --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+apk add libwf-utils --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+apk add wayfire-dev --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+#apk add libexecinfo-dev --repository=http://dl-cdn.alpinelinux.org/alpine/3.16/main
+
+
+apk add libexecinfo-dev --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
 
 echo Installation of WayQT
 git clone https://gitlab.com/desktop-frameworks/wayqt.git wayqt
@@ -49,6 +65,7 @@ echo Installation of DFL IPC
 git clone https://gitlab.com/desktop-frameworks/ipc.git df5ipc
 cd df5ipc && meson .build --prefix=/usr --buildtype=release
 ninja -C .build -k 0 -j $(nproc) && ninja -C .build install
+cd ..
 
 echo Installation of DFL Login1
 git clone https://gitlab.com/desktop-frameworks/login1.git dfl-login1

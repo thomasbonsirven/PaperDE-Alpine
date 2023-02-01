@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo Add Repository
-echo "https://dl-cdn.alpinelinux.org/alpine/3.17/community" >> /etc/apk/repositories
+echo "http://dl-cdn.alpinelinux.org/alpine/3.17/community" >> /etc/apk/repositories
 
 echo Installation Dependency
 apk add --no-cache \
@@ -73,7 +73,7 @@ echo Installation PaperDE
 git clone https://gitlab.com/cubocore/paper/paperde paperde
 cd paperde && mkdir build && cd build
 
-cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=lib -DPKGCONFPATH=/etc/xdg/paperde -DPKGSHAREDPATH=share/paperde -GNinja ..
-ninja -k 0 -j $(nproc)
-ninja install
+meson .build --prefix=/usr --buildtype=release
+ninja -C .build -k 0 -j $(nproc) && ninja -C .build install
+
 

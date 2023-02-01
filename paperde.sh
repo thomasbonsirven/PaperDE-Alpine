@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/bin/sh
+
+echo Add Repository
+echo "https://dl-cdn.alpinelinux.org/alpine/3.17/community" >> /etc/apk/repositories
 
 echo Installation Dependency
 apk add --no-cache \
@@ -32,33 +35,32 @@ apk add clipman --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing
 echo Installation of WayQT
 git clone https://gitlab.com/desktop-frameworks/wayqt.git wayqt
 cd wayqt && meson .build --prefix=/usr --buildtype=release
-ninja -C .build -k 0 -j $(nproc) && sudo ninja -C .build install
+ninja -C .build -k 0 -j $(nproc) && ninja -C .build install
 
 echo Installation of DFL Applications
 git clone https://gitlab.com/desktop-frameworks/applications dfl-applications
 cd dfl-applications && meson .build --prefix=/usr --buildtype=release -Duse_qt_version=qt5
-ninja -C .build -k 0 -j $(nproc) && sudo ninja -C .build install
+ninja -C .build -k 0 -j $(nproc) && ninja -C .build install
 
 echo Installation of DFL IPC
 git clone https://gitlab.com/desktop-frameworks/ipc.git df5ipc
 cd df5ipc && meson .build --prefix=/usr --buildtype=release
-ninja -C .build -k 0 -j $(nproc) && sudo ninja -C .build install
+ninja -C .build -k 0 -j $(nproc) && ninja -C .build install
 
 echo Installation of DFL Login1
 git clone https://gitlab.com/desktop-frameworks/login1.git dfl-login1
 cd dfl-login1 && meson .build --prefix=/usr --buildtype=release
-ninja -C .build -k 0 -j $(nproc) && sudo ninja -C .build install
+ninja -C .build -k 0 -j $(nproc) && ninja -C .build install
 
 echo Installation of DFL Settings
 git clone https://gitlab.com/desktop-frameworks/settings.git dfl-settings
 cd dfl-settings && meson .build --prefix=/usr --buildtype=release
-ninja -C .build -k 0 -j $(nproc) && sudo ninja -C .build install
+ninja -C .build -k 0 -j $(nproc) && ninja -C .build install
 
 echo Installation of DFL SNI
 git clone https://gitlab.com/desktop-frameworks/status-notifier.git dfl-sni
 cd dfl-sni && meson .build --prefix=/usr --buildtype=release
-ninja -C .build -k 0 -j $(nproc) && sudo ninja -C .build install
-
+ninja -C .build -k 0 -j $(nproc) && ninja -C .build install
 
 
 

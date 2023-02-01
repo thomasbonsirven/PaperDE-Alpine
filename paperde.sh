@@ -73,6 +73,12 @@ echo Installation PaperDE
 git clone https://gitlab.com/cubocore/paper/paperde paperde
 cd paperde && mkdir build && cd build
 
+CMAKE_INSTALL_LIBDIR = ${CMAKE_INSTALL_PREFIX}/lib/x86_64-linux-gnu
+PKGCONFPATH = /etc/xdg/paperde
+PKGSHAREDPATH = ${CMAKE_INSTALL_PREFIX}/share/paperde
+CONF_INSTALL_PATH = /etc/xdg/paperde
+
+
 meson .build --prefix=/usr --buildtype=release
 ninja -C .build -k 0 -j $(nproc) && ninja -C .build install
 
